@@ -12,13 +12,13 @@ public class ChangingMenu : MonoBehaviour {
     bool unlocked = false;
 
     // Canvas
-    public Canvas startingCanvas, Disconnect, removeCart, pressNext;
+    public Canvas startingCanvas, Disconnect, removeCart, fillCart, fillTubing, disconnectWarning;
     public Text doneText, backText;
-    public Button doneButton, backButton;
+    public Button doneButton, backButton, lockedButton;
 
     void Update()
     {
-        if(removeCart.gameObject.activeSelf == true) {
+        if(removeCart.gameObject.activeSelf == true || fillCart.gameObject.activeSelf == true) {
             backButton.gameObject.SetActive(false);
             doneText.text = "UNLOCK";
         } else
@@ -30,6 +30,11 @@ public class ChangingMenu : MonoBehaviour {
         if(doneText.text == "UNLOCK")
         {
             doneButton.image.color = new Color(255, 255, 255, 0.5f);
+        }
+
+        if(unlocked)
+        {
+            lockedButton.image.color = new Color(255, 255, 255, 0.5f);
         }
     }
 
@@ -55,15 +60,23 @@ public class ChangingMenu : MonoBehaviour {
         {
             unlocked = false;
         }
+    }
 
+    public void LockedScreen()
+    {
         // Screen lock
-        if (unlocked)
+        if (unlocked && removeCart.gameObject.activeSelf == true)
         {
             removeCart.gameObject.SetActive(false);
-            pressNext.gameObject.SetActive(true);
+            fillCart.gameObject.SetActive(true);
+            unlocked = false;
         }
 
-        Debug.Log(unlocked);
+        if(unlocked && fillCart.gameObject.activeSelf == true)
+        {
+            fillCart.gameObject.SetActive(false);
+            disconnectWarning.gameObject.SetActive(true);
+        }
     }
 
     public void OnOff()
