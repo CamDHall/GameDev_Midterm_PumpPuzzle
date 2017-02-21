@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour {
 
     public GameObject enemyPrefab;
     float Timer;
+    float spawnDecrease = 0;
 
 	void Start () {
         Timer = Time.time + 5f;
@@ -14,8 +15,20 @@ public class Spawner : MonoBehaviour {
 	void Update () {
 		if(Timer < Time.time)
         {
-            Instantiate(enemyPrefab);
-            Timer = Time.time + 5f;
+            var enemy = Instantiate(enemyPrefab);
+            int choice = Random.Range(0, 2);
+            if (choice == 1)
+            {
+                enemy.transform.position = new Vector3(0.5f, enemy.transform.position.y, enemy.transform.position.z);
+            }
+
+            Timer = Time.time + Random.Range(3f, 15f - spawnDecrease);
+            if (spawnDecrease <= 12)
+            {
+                spawnDecrease += 0.15f;
+            }
+
+            Debug.Log(choice);
         }
 	}
 }

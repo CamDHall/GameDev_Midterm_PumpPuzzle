@@ -44,10 +44,19 @@ public class ChangingMenu : MonoBehaviour {
         Disconnect.gameObject.SetActive(true);
     }
 
-    public void RemoveCart()
+    public void NextButton()
     {
-        Disconnect.gameObject.SetActive(false);
-        removeCart.gameObject.SetActive(true);
+        if (Disconnect.gameObject.activeSelf == true)
+        {
+            Disconnect.gameObject.SetActive(false);
+            removeCart.gameObject.SetActive(true);
+        }
+
+        if(disconnectWarning.gameObject.activeSelf == true)
+        {
+            disconnectWarning.gameObject.SetActive(false);
+            fillTubing.gameObject.SetActive(true);
+        }
     }
 
     public void Unlock()
@@ -69,7 +78,6 @@ public class ChangingMenu : MonoBehaviour {
         {
             removeCart.gameObject.SetActive(false);
             fillCart.gameObject.SetActive(true);
-            unlocked = false;
         }
 
         if(unlocked && fillCart.gameObject.activeSelf == true)
