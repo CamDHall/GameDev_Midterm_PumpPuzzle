@@ -22,13 +22,11 @@ public class Spawner : MonoBehaviour {
                 enemy.transform.position = new Vector3(0.5f, enemy.transform.position.y, enemy.transform.position.z);
             }
 
-            Timer = Time.time + Random.Range(3f, 15f - spawnDecrease);
+            Timer = Time.time + Random.Range(6f - (spawnDecrease/2), 18f - spawnDecrease);
             if (spawnDecrease <= 12)
             {
                 spawnDecrease += 0.15f;
             }
-
-            Debug.Log(choice);
         }
 	}
 }
