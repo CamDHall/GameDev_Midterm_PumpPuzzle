@@ -17,7 +17,7 @@ public class ChangingMenu : MonoBehaviour {
     bool whileFilling = true;
     bool filling = false;
     bool finishedFilling = false;
-    int filled = 0;
+    public static int filled = 0;
     int fillNeeded;
 
     // Cannula
@@ -36,11 +36,12 @@ public class ChangingMenu : MonoBehaviour {
     {
         filledtimer = Time.time + 1.5f;
         fillNeeded = Random.Range(10, 18);
+        Progress.fillNeeded = fillNeeded;
     }
 
     void Update()
     {
-        if(removeCart.gameObject.activeSelf == true || fillCart.gameObject.activeSelf == true) {
+        if (removeCart.gameObject.activeSelf == true || fillCart.gameObject.activeSelf == true) {
             backButton.gameObject.SetActive(false);
             doneText.text = "UNLOCK";
         } else
@@ -62,7 +63,7 @@ public class ChangingMenu : MonoBehaviour {
         // Filling 
         if(filling && cannulaBool == false)
         {
-            if(Time.time > filledtimer)
+            if (Time.time > filledtimer)
             {
                 filled++;
                 filledtimer = Time.time + 1.5f;
