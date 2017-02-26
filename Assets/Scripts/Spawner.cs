@@ -5,6 +5,10 @@ using UnityEngine;
 public class Spawner : MonoBehaviour {
 
     public GameObject enemyPrefab;
+
+    // Pieces
+    public GameObject cartridge;
+
     float Timer;
     float spawnDecrease = 0;
 
@@ -28,5 +32,23 @@ public class Spawner : MonoBehaviour {
                 spawnDecrease += 0.15f;
             }
         }
-	}
+
+        if (ChangingMenu.cartChanged)
+        {
+            Instantiate(cartridge);
+            ChangingMenu.cartChanged = false;
+        }
+
+        if (ChangingMenu.cartFilled)
+        {
+            Instantiate(cartridge);
+            ChangingMenu.cartFilled = false;
+        }
+
+        if (ChangingMenu.cannulaFinished)
+        {
+            Instantiate(cartridge);
+            ChangingMenu.cannulaFinished = false;
+        }
+    }
 }

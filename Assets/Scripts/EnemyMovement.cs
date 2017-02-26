@@ -14,10 +14,10 @@ public class EnemyMovement : MonoBehaviour {
 	void Update () {
         if(initialX == 0.5f)
         {
-            transform.position = new Vector3(transform.position.x - (Time.deltaTime * 0.9f), transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x - (Time.deltaTime * 0.7f), transform.position.y, transform.position.z);
         } else
         {
-            transform.position = new Vector3(transform.position.x + (Time.deltaTime * 0.9f), transform.position.y, transform.position.z);
+            transform.position = new Vector3(transform.position.x + (Time.deltaTime * 0.7f), transform.position.y, transform.position.z);
         }
 
         if(transform.position.x >= 5 || transform.position.x <= -5f)

@@ -17,14 +17,14 @@ public class Movement : MonoBehaviour {
 		
         if(Input.GetKeyDown(KeyCode.S))
         {
-            Timer = Time.time + 3f;
+            Timer = Time.time + 3.5f;
             transform.localPosition = new Vector3(initialPos.x, initialPos.y - 0.2f, initialPos.z - 0.5f);
         }
 
         if(transform.localPosition.y == initialPos.y - 0.2f && Time.time > Timer)
         {
             transform.localPosition = initialPos;
-            Timer = Time.time + 3f;
+            Timer = Time.time + 3.5f;
         }
 
         if (Input.GetKeyDown(KeyCode.W))
@@ -38,7 +38,6 @@ public class Movement : MonoBehaviour {
         if (coll.gameObject.tag == "Enemy")
         {
             SceneManager.LoadScene("Death");
-            Debug.Log("DEATH");
         }
     }
 }

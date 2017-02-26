@@ -20,7 +20,6 @@ public class Progress : MonoBehaviour
     {
         filled = (float)(ChangingMenu.filled);
         percent = filled / fillNeeded;
-        Debug.Log(percent);
         foregroundImage.fillAmount = percent;
     }
 }

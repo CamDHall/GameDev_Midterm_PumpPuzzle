@@ -32,6 +32,11 @@ public class ChangingMenu : MonoBehaviour {
     public Text doneText, backText, startStop, amountFilled, cannulaAmount, cannulaStart;
     public Button doneButton, backButton, lockedButton;
 
+    // Spawning Bools
+    public static bool cartChanged = false;
+    public static bool cartFilled = false;
+    public static bool cannulaFinished = false;
+
     void Start()
     {
         filledtimer = Time.time + 1.5f;
@@ -85,7 +90,6 @@ public class ChangingMenu : MonoBehaviour {
         {
             cannulaStart.text = "FINISH";
             finishedCannula = true;
-
         }
 
         if(filled == fillNeeded)
@@ -128,6 +132,7 @@ public class ChangingMenu : MonoBehaviour {
         }
     }
 
+    // Remove cart
     public void LockedScreen()
     {
         // Screen lock
@@ -135,6 +140,7 @@ public class ChangingMenu : MonoBehaviour {
         {
             removeCart.gameObject.SetActive(false);
             fillCart.gameObject.SetActive(true);
+            cartChanged = true;
         }
 
         if(unlocked && fillCart.gameObject.activeSelf == true)
@@ -144,6 +150,7 @@ public class ChangingMenu : MonoBehaviour {
         }
     }
 
+    // Fill cart
     public void StartStop()
     {
         if (whileFilling)
@@ -164,6 +171,7 @@ public class ChangingMenu : MonoBehaviour {
                 fillTubing.gameObject.SetActive(false);
                 startingCanvas.gameObject.SetActive(true);
                 whileFilling = false;
+                cartFilled = true;
             }
         }
     }
@@ -189,6 +197,7 @@ public class ChangingMenu : MonoBehaviour {
         {
             fillCannula.gameObject.SetActive(false);
             resume.gameObject.SetActive(true);
+            cannulaFinished = true;
         }
     }
 
