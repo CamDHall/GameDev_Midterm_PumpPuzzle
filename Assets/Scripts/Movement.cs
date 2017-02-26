@@ -6,16 +6,25 @@ using UnityEngine.SceneManagement;
 public class Movement : MonoBehaviour {
 
     Vector3 initialPos;
+    float Timer;
 
 	void Start () {
         initialPos = transform.localPosition;
+        Timer = Time.time;
 	}
 	
 	void Update () {
 		
         if(Input.GetKeyDown(KeyCode.S))
         {
-            transform.localPosition = new Vector3(initialPos.x, initialPos.y - 0.2f, initialPos.z - 0.4f);
+            Timer = Time.time + 3f;
+            transform.localPosition = new Vector3(initialPos.x, initialPos.y - 0.2f, initialPos.z - 0.5f);
+        }
+
+        if(transform.localPosition.y == initialPos.y - 0.2f && Time.time > Timer)
+        {
+            transform.localPosition = initialPos;
+            Timer = Time.time + 3f;
         }
 
         if (Input.GetKeyDown(KeyCode.W))
