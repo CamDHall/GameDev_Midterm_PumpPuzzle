@@ -6,12 +6,17 @@ public class EnemyMovement : MonoBehaviour {
 
     float initialX = 0;
 
+    // Pieces
+    public static Vector3 enemyPos;
+
     void Start()
     {
         initialX = transform.position.x;
     }
 
 	void Update () {
+        enemyPos = transform.position;
+
         if(initialX == 0.5f)
         {
             transform.position = new Vector3(transform.position.x - (Time.deltaTime * 0.7f), transform.position.y, transform.position.z);

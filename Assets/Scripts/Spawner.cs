@@ -5,7 +5,7 @@ using UnityEngine;
 public class Spawner : MonoBehaviour {
 
     public GameObject enemyPrefab;
-
+    public static Vector3 enemyPos;
     // Pieces
     public GameObject cartridge;
 
@@ -33,6 +33,7 @@ public class Spawner : MonoBehaviour {
             }
         }
 
+        // Pieces Spawning
         if (ChangingMenu.cartChanged)
         {
             Instantiate(cartridge);
