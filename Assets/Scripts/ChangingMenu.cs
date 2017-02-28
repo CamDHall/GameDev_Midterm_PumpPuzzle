@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class ChangingMenu : MonoBehaviour {
 
     bool unlocked = false;
-
+    bool canFill = false;
     // Filled
     float filledtimer;
     bool whileFilling = true;
@@ -38,6 +38,13 @@ public class ChangingMenu : MonoBehaviour {
         filledtimer = Time.timeSinceLevelLoad + 1.5f;
         fillNeeded = Random.Range(10, 18);
         Progress.fillNeeded = fillNeeded;
+
+        // Reset Variables
+        filled = 0;
+        cartChanged = false;
+        cartFilled = false;
+        cannulaFinished = false;
+
     }
 
     void Update()
@@ -101,19 +108,16 @@ public class ChangingMenu : MonoBehaviour {
         Disconnect.gameObject.SetActive(true);
     }
 
-    public void NextButton()
+    public void FirstNextButton()
     {
-        if (Disconnect.gameObject.activeSelf == true)
-        {
             Disconnect.gameObject.SetActive(false);
             removeCart.gameObject.SetActive(true);
-        }
+    }
 
-        if(disconnectWarning.gameObject.activeSelf == true)
-        {
-            disconnectWarning.gameObject.SetActive(false);
-            fillTubing.gameObject.SetActive(true);
-        }
+    public void SecondNextButton()
+    {
+        disconnectWarning.gameObject.SetActive(false);
+        fillTubing.gameObject.SetActive(true);
     }
 
     public void Unlock()
@@ -137,6 +141,7 @@ public class ChangingMenu : MonoBehaviour {
             removeCart.gameObject.SetActive(false);
             fillCart.gameObject.SetActive(true);
             cartChanged = true;
+            canFill = true;
         }
 
         if(unlocked && fillCart.gameObject.activeSelf == true)
@@ -207,8 +212,30 @@ public class ChangingMenu : MonoBehaviour {
         }
     }
 
+    // Full tubing
+    public void FillTubing()
+    {
+        if(canFill)
+        {
+            startingCanvas.gameObject.SetActive(false);
+            fillTubing.gameObject.SetActive(true);
+        }
+    }
+
     public void Begin()
     {
         SceneManager.LoadScene("main");
+    }
+
+    public void Back()
+    {
+        Disconnect.gameObject.SetActive(false);
+        removeCart.gameObject.SetActive(false);
+        fillCart.gameObject.SetActive(false);
+        fillTubing.gameObject.SetActive(false);
+        disconnectWarning.gameObject.SetActive(false);
+        fillCannula.gameObject.SetActive(false);
+
+        startingCanvas.gameObject.SetActive(true);
     }
 }

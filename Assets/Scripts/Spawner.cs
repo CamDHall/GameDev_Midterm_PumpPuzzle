@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour {
     
     // Pieces
     public GameObject cartridge;
+    float cartTimer;
     
     // Checkmarks
     public Image firstCheck, secondCheck, thirdCheck;
@@ -20,6 +21,7 @@ public class Spawner : MonoBehaviour {
 
 	void Start () {
         Timer = Time.timeSinceLevelLoad + 5f;
+        cartTimer = Time.timeSinceLevelLoad + 8f;
 	}
 	
 	void Update () {
@@ -37,13 +39,18 @@ public class Spawner : MonoBehaviour {
                 spawnDecrease += 0.3f;
             }
 
-            Timer = Time.timeSinceLevelLoad + Random.Range(6f - (spawnDecrease), 18f - spawnDecrease);
+            Timer = Time.timeSinceLevelLoad + Random.Range(6f - (spawnDecrease), 16f - spawnDecrease);
         }
 
         // Pieces Spawning
+        if(cartTimer < Time.timeSinceLevelLoad)
+        {
+            var piece = Instantiate(cartridge);
+            cartTimer = Time.timeSinceLevelLoad + Random.Range(7f, 18f);
+        }
+
         if (ChangingMenu.cartChanged)
         {
-            Instantiate(cartridge);
             ChangingMenu.cartChanged = false;
             // Checkmarks
             var addFirst = firstCheck.GetComponent<Image>();
@@ -52,7 +59,6 @@ public class Spawner : MonoBehaviour {
 
         if (ChangingMenu.cartFilled)
         {
-            Instantiate(cartridge);
             ChangingMenu.cartFilled = false;
             var addSecond = secondCheck.GetComponent<Image>();
             addSecond.sprite = checkmark;
@@ -60,7 +66,6 @@ public class Spawner : MonoBehaviour {
 
         if (ChangingMenu.cannulaFinished)
         {
-            Instantiate(cartridge);
             ChangingMenu.cannulaFinished = false;
             var addThird = thirdCheck.GetComponent<Image>();
             addThird.sprite = checkmark;

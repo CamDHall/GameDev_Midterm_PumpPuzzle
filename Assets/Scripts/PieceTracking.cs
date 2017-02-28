@@ -9,7 +9,7 @@ public class PieceTracking : MonoBehaviour {
 	void Update () {
         if(clicked)
         {
-            transform.position = new Vector3(Mathf.Lerp(transform.position.x, EnemyMovement.enemyPos.x, 1.25f * Time.deltaTime), Mathf.Lerp(transform.position.y, EnemyMovement.enemyPos.y, 1.25f * Time.deltaTime), Mathf.Lerp(transform.position.z, EnemyMovement.enemyPos.z, 1.5f * Time.deltaTime));
+            transform.position = new Vector3(Mathf.Lerp(transform.position.x, EnemyMovement.enemyPos.x, 1.8f * Time.deltaTime), Mathf.Lerp(transform.position.y, EnemyMovement.enemyPos.y, 1.8f * Time.deltaTime), Mathf.Lerp(transform.position.z, EnemyMovement.enemyPos.z, 1.5f * Time.deltaTime));
         }
 	}
 
