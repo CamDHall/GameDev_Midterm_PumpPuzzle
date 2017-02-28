@@ -34,7 +34,7 @@ public class Spawner : MonoBehaviour {
 
             if (spawnDecrease <= 6)
             {
-                spawnDecrease += 0.15f;
+                spawnDecrease += 0.3f;
             }
 
             Timer = Time.timeSinceLevelLoad + Random.Range(6f - (spawnDecrease), 18f - spawnDecrease);
