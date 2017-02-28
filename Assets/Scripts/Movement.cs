@@ -18,7 +18,7 @@ public class Movement : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.S))
         {
             Timer = Time.time + 3.5f;
-            transform.localPosition = new Vector3(initialPos.x, initialPos.y - 0.2f, initialPos.z - 0.5f);
+            transform.localPosition = new Vector3(initialPos.x, initialPos.y - 0.2f, initialPos.z - 0.6f);
         }
 
         if(transform.localPosition.y == initialPos.y - 0.2f && Time.time > Timer)

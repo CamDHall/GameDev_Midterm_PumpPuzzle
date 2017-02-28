@@ -5,10 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class ChangingMenu : MonoBehaviour {
-    
-    // On/Off Switch
-    public Text onOff;
-    bool off = true;
 
     bool unlocked = false;
 
@@ -28,9 +24,9 @@ public class ChangingMenu : MonoBehaviour {
     float timerCannulaFill;
 
     // Canvas
-    public Canvas startingCanvas, Disconnect, removeCart, fillCart, fillTubing, disconnectWarning, fillCannula, resume;
+    public Canvas startingCanvas, Disconnect, removeCart, fillCart, fillTubing, disconnectWarning, fillCannula;
     public Text doneText, backText, startStop, amountFilled, cannulaAmount, cannulaStart;
-    public Button doneButton, backButton, lockedButton;
+    public Button doneButton, backButton, lockedButton, resume;
 
     // Spawning Bools
     public static bool cartChanged = false;
@@ -39,7 +35,7 @@ public class ChangingMenu : MonoBehaviour {
 
     void Start()
     {
-        filledtimer = Time.time + 1.5f;
+        filledtimer = Time.timeSinceLevelLoad + 1.5f;
         fillNeeded = Random.Range(10, 18);
         Progress.fillNeeded = fillNeeded;
     }
@@ -68,20 +64,20 @@ public class ChangingMenu : MonoBehaviour {
         // Filling 
         if(filling && cannulaBool == false)
         {
-            if (Time.time > filledtimer)
+            if (Time.timeSinceLevelLoad > filledtimer)
             {
                 filled++;
-                filledtimer = Time.time + 1.5f;
+                filledtimer = Time.timeSinceLevelLoad + 1.5f;
             }
             amountFilled.text = "Amount filled: " + filled.ToString();
         }
 
         if(cannulaBool == true)
         {
-            if (Time.time > timerCannulaFill)
+            if (Time.timeSinceLevelLoad > timerCannulaFill)
             {
                 cannulaFilled++;
-                timerCannulaFill = Time.time + 1.75f;
+                timerCannulaFill = Time.timeSinceLevelLoad + 1.75f;
                 cannulaAmount.text = "Amount filled: " + cannulaFilled.ToString();
             }
         }
@@ -182,7 +178,7 @@ public class ChangingMenu : MonoBehaviour {
         {
             fillCannula.gameObject.SetActive(true);
             startingCanvas.gameObject.SetActive(false);
-            timerCannulaFill = Time.time + 1.75f;
+            timerCannulaFill = Time.timeSinceLevelLoad + 1.75f;
         }
     }
 
@@ -196,26 +192,23 @@ public class ChangingMenu : MonoBehaviour {
         if(finishedCannula)
         {
             fillCannula.gameObject.SetActive(false);
-            resume.gameObject.SetActive(true);
+            startingCanvas.gameObject.SetActive(true);
             cannulaFinished = true;
+            resume.image.color = new Color(255, 255, 255, 0.5f);
         }
     }
 
     public void Resume()
     {
-        SceneManager.LoadScene("Win");
+        if(finishedCannula)
+        {
+            Debug.Log("FIN");
+            SceneManager.LoadScene("Win");
+        }
     }
 
-    public void OnOff()
+    public void Begin()
     {
-        if (off)
-        {
-            onOff.text = "ON";
-            off = false;
-        } else
-        {
-            onOff.text = "OFF";
-            off = true;
-        }
+        SceneManager.LoadScene("main");
     }
 }
