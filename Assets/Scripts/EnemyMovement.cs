@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour {
 
     float initialX = 0;
-    float accelator = 0;
+    float increaseingSpeed = 0;
 
     // Pieces
     public static Vector3 enemyPos;
@@ -20,10 +20,10 @@ public class EnemyMovement : MonoBehaviour {
 
         if(initialX == 0.5f)
         {
-            transform.position = new Vector3(transform.position.x - (Time.deltaTime * 0.9f), transform.position.y, transform.position.z);
+            GetComponent<Rigidbody>().AddForce(new Vector3(-(0.3f + Spawner.accelerator), 0, 0));
         } else
         {
-            transform.position = new Vector3(transform.position.x + (Time.deltaTime * 0.9f), transform.position.y, transform.position.z);
+            GetComponent<Rigidbody>().AddForce(new Vector3((0.3f + Spawner.accelerator), 0, 0));
         }
 
         if(transform.position.x >= 5 || transform.position.x <= -5f)

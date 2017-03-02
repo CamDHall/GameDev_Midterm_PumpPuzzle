@@ -7,6 +7,7 @@ public class Spawner : MonoBehaviour {
 
     public GameObject enemyPrefab;
     public static Vector3 enemyPos;
+    public static float accelerator= 0.3f;
     
     // Pieces
     public GameObject cartridge;
@@ -22,6 +23,7 @@ public class Spawner : MonoBehaviour {
 	void Start () {
         Timer = Time.timeSinceLevelLoad + 5f;
         cartTimer = Time.timeSinceLevelLoad + 8f;
+        accelerator = 0.3f;
 	}
 	
 	void Update () {
@@ -34,12 +36,14 @@ public class Spawner : MonoBehaviour {
                 enemy.transform.position = new Vector3(0.5f, enemy.transform.position.y, enemy.transform.position.z);
             }
 
-            if (spawnDecrease <= 6)
+            if (spawnDecrease <= 6.4f)
             {
-                spawnDecrease += 0.3f;
+                spawnDecrease += 0.4f;
             }
 
-            Timer = Time.timeSinceLevelLoad + Random.Range(6f - (spawnDecrease), 16f - spawnDecrease);
+            Timer = Time.timeSinceLevelLoad + Random.Range(6.8f - (spawnDecrease), 11.4f - spawnDecrease);
+            accelerator += 0.15f;
+
         }
 
         // Pieces Spawning

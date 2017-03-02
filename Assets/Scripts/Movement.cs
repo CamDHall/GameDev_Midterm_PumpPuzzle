@@ -7,24 +7,32 @@ public class Movement : MonoBehaviour {
 
     Vector3 initialPos;
     float Timer;
+    float timerDecrease;
 
 	void Start () {
         initialPos = transform.localPosition;
-        Timer = Time.time;
+        Timer = Time.timeSinceLevelLoad;
 	}
 	
 	void Update () {
-		
-        if(Input.GetKeyDown(KeyCode.S))
+        if(timerDecrease >= 0.9f)
         {
-            Timer = Time.time + 3.5f;
-            transform.localPosition = new Vector3(initialPos.x, initialPos.y - 0.2f, initialPos.z - 0.6f);
+            timerDecrease = Spawner.accelerator / 3;
+        } else
+        {
+            timerDecrease = 0.9f;
         }
 
-        if(transform.localPosition.y == initialPos.y - 0.2f && Time.time > Timer)
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            Timer = Time.timeSinceLevelLoad + (2f - timerDecrease);
+            transform.localPosition = new Vector3(initialPos.x, initialPos.y - 0.4f, initialPos.z - 0.6f);
+        }
+
+        if(Time.timeSinceLevelLoad >= Timer)
         {
             transform.localPosition = initialPos;
-            Timer = Time.time + 3.5f;
+            Timer = Time.timeSinceLevelLoad + (2f - timerDecrease);
         }
 
         if (Input.GetKeyDown(KeyCode.W))
