@@ -10,8 +10,11 @@ public class Spawner : MonoBehaviour {
     public static float accelerator= 0.3f;
     
     // Pieces
-    public GameObject cartridge;
     float cartTimer;
+    float trash = 0;
+    public GameObject trash1;
+    public GameObject trash2;
+    public GameObject trash3;
     
     // Checkmarks
     public Image firstCheck, secondCheck, thirdCheck;
@@ -23,7 +26,7 @@ public class Spawner : MonoBehaviour {
 	void Start () {
         Timer = Time.timeSinceLevelLoad + 5f;
         cartTimer = Time.timeSinceLevelLoad + 8f;
-        accelerator = 0.3f;
+        accelerator = 50f;
 	}
 	
 	void Update () {
@@ -33,7 +36,7 @@ public class Spawner : MonoBehaviour {
             int choice = Random.Range(0, 2);
             if (choice == 1)
             {
-                enemy.transform.position = new Vector3(0.5f, enemy.transform.position.y, enemy.transform.position.z);
+                enemy.transform.position = new Vector3(193, enemy.transform.position.y, enemy.transform.position.z);
             }
 
             if (spawnDecrease <= 6.4f)
@@ -42,21 +45,33 @@ public class Spawner : MonoBehaviour {
             }
 
             Timer = Time.timeSinceLevelLoad + Random.Range(6.8f - (spawnDecrease), 11.4f - spawnDecrease);
-            accelerator += 0.15f;
+            accelerator += 15f;
 
         }
 
         // Pieces Spawning
         if(cartTimer < Time.timeSinceLevelLoad)
         {
-            var piece = Instantiate(cartridge);
+            if(trash == 0)
+            {
+                var piece = Instantiate(trash1);
+                trash++;
+            } else if(trash == 1)
+            {
+                var piece = Instantiate(trash2);
+                trash++;
+            } else
+            {
+                var piece = Instantiate(trash3);
+                trash = 0;
+            }
             cartTimer = Time.timeSinceLevelLoad + Random.Range(7f, 18f);
         }
 
+        // Checkmarks
         if (ChangingMenu.cartChanged)
         {
             ChangingMenu.cartChanged = false;
-            // Checkmarks
             var addFirst = firstCheck.GetComponent<Image>();
             addFirst.sprite = checkmark;
         }

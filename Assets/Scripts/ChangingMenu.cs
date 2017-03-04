@@ -18,7 +18,7 @@ public class ChangingMenu : MonoBehaviour {
 
     // Cannula
     bool cannulaBool = false;
-    int cannulaFilled = 0;
+    public static int cannulaFilled = 0;
     int cannulaFillNeeded = 3;
     bool finishedCannula = false;
     float timerCannulaFill;
@@ -43,6 +43,7 @@ public class ChangingMenu : MonoBehaviour {
         filled = 0;
         cartChanged = false;
         cartFilled = false;
+        cannulaFilled = 0;
         cannulaFinished = false;
 
     }
@@ -207,7 +208,6 @@ public class ChangingMenu : MonoBehaviour {
     {
         if(finishedCannula)
         {
-            Debug.Log("FIN");
             SceneManager.LoadScene("Win");
         }
     }
